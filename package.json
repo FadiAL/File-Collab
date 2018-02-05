@@ -1,0 +1,21 @@
+{
+  "name": "file-collab",
+  "version": "0.0.1",
+  "description": "edit files in realtime with others",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FadiAL/File-Collab.git"
+  },
+  "keywords": [
+    "edit",
+    "collaborate",
+    "files",
+    "realtime"
+  ],
+  "author": "FadiAL",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FadiAL/File-Collab/issues"
+  },
+  "homepage": "https://github.com/FadiAL/File-Collab#readme"
+}
