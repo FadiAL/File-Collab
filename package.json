@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/FadiAL/File-Collab/issues"
   },
-  "homepage": "https://github.com/FadiAL/File-Collab#readme"
+  "homepage": "https://github.com/FadiAL/File-Collab#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
