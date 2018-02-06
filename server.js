@@ -5,5 +5,9 @@ var log = require('morgan');
 
 var app = express();
 
+app.get('*', function(req, res, next){
+  res.sendFile(path.join(__dirname, 'client/dev/index.html'));
+});
+
 var server = http.createServer(app);
 server.listen(8080);
