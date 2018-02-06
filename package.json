@@ -18,6 +18,9 @@
     "url": "https://github.com/FadiAL/File-Collab/issues"
   },
   "homepage": "https://github.com/FadiAL/File-Collab#readme",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.16.2",
     "morgan": "^1.9.0",
