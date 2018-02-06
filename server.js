@@ -6,9 +6,13 @@ var redis = require('redis');
 
 var app = express();
 
-app.get('*', function(req, res, next){
-  res.sendFile(path.join(__dirname, 'client/dev/index.html'));
-});
+const PORT = process.env.PORT || 8080;
+
+app.use(log('tiny'));
+if(process.env.NODE_ENV == 'development')
+  app.use(express.static(path.join(__dirname, 'client/dev')));
+else if(process.env.NODE_ENV == 'production')
+  app.use(express.static(path.join(__dirname, 'client/build')));
 
 var server = http.createServer(app);
-server.listen(8080);
+server.listen(PORT);
