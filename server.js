@@ -5,6 +5,7 @@ var log = require('morgan');
 var redis = require('redis');
 
 var app = express();
+var client = redis.createClient();
 
 const PORT = process.env.PORT || 8080;
 
@@ -16,3 +17,9 @@ else if(process.env.NODE_ENV == 'production')
 
 var server = http.createServer(app);
 server.listen(PORT);
+
+//Other Functions
+
+client.on('error', function (err) {
+  console.log('Error ' + err)
+})
