@@ -1,5 +1,19 @@
 //A collection of methods for reading and writing redis files
-exports.getAll = () => {}; //TODO: Add method
-exports.getIf = () => {}; //TODO: Add method
-exports.getFile = () => {}; //TODO: Add method
-exports.setFile = () => {}; //TODO: Add method
+
+module.exports = function(redis){
+  return {
+    getAll : cb => {
+      redis.keys('*', (err, val) => {
+        cb(val.filter(name => name.indexOf('key:') < 0));
+      });
+    },
+    getIf : () => {}, //TODO: Add method
+    getFile : (keyName, cb) => {
+      redis.get('keyName', (err, val) => {
+        if(!err)
+          cb(val);
+      });
+    },
+    setFile : () => {} //TODO: Add method
+  };
+};
