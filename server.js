@@ -25,10 +25,14 @@ server.listen(PORT);
 
 io.on('connection', function(socket){
   socket.on('files', function(){
-    redisLib.getAll(function(val){console.log(val)});//TODO:Add socket emit
+    redisLib.getAll(function(val){
+      socket.emit('files', val);
+    });
   });
   socket.on('fileReq', function(id, msg){
-    console.log('Socket requested ' + msg);
+    redisLib.getFile(msg, function(val){
+      socket.emit('fileReq', val);
+    });
   });
   socket.on('keystroke', function(id, msg){
     console.log('Socket typed ' + msg);
