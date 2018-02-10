@@ -4,7 +4,8 @@ module.exports = function(redis){
   return {
     getAll : cb => {
       redis.keys('*', (err, val) => {
-        cb(val.filter(name => name.indexOf('key:') < 0));
+        val = val.filter(name => name.indexOf('key:') < 0);
+        cb(val);
       });
     },
     getIf : () => {}, //TODO: Add method
@@ -12,6 +13,8 @@ module.exports = function(redis){
       redis.get('keyName', (err, val) => {
         if(!err)
           cb(val);
+        else
+          cb("Error: File not retrieved");
       });
     },
     setFile : () => {} //TODO: Add method
