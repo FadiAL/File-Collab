@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/FadiAL/File-Collab#readme",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "dependencies": {
     "express": "^4.16.2",
