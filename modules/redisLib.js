@@ -10,7 +10,7 @@ module.exports = function(redis){
     },
     getIf : () => {}, //TODO: Add method
     getFile : (keyName, cb) => {
-      redis.get('keyName', (err, val) => {
+      redis.get(keyName, (err, val) => {
         if(!err)
           cb(val);
         else

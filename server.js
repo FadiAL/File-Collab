@@ -29,7 +29,7 @@ io.on('connection', function(socket){
       socket.emit('files', val);
     });
   });
-  socket.on('fileReq', function(id, msg){
+  socket.on('fileReq', function(msg){
     redisLib.getFile(msg, function(val){
       socket.emit('fileReq', val);
     });
