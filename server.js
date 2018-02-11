@@ -9,6 +9,8 @@ var app = express();
 var client = redis.createClient();
 var redisLib = require('./modules/redisLib.js')(client);
 
+var rooms = {};
+
 const PORT = process.env.PORT || 8080;
 
 app.use(log('tiny'));
@@ -31,10 +33,13 @@ io.on('connection', function(socket){
   });
   socket.on('fileReq', function(msg){
     redisLib.getFile(msg, function(val){
+      socket.join(msg);
+      rooms[socket.id] = msg;
       socket.emit('fileReq', val);
     });
   });
   socket.on('keystroke', function(msg){
+    socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
     console.log('Socket typed ' + msg);
   });
   socket.on('fileClose', function(id, msg){
