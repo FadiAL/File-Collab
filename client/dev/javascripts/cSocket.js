@@ -14,11 +14,18 @@ socket.on('files', function(fileList){
 //React
 
 class File extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {active: false};
+  }
   render() {
-    return <li className="pure-menu-item">
-    <a href="#" className="pure-menu-link">{this.props.name}</a>
+    return <li className={"pure-menu-item" + (this.state.active ? "pure-menu-selected" : "")}>
+    <a className="pure-menu-link" onClick={fileSelected}>{this.props.name}</a>
     </li>
   }
+}
+function fileSelected() {
+  //TODO:Add function
 }
 class FileList extends React.Component {
   render() {
