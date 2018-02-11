@@ -14,11 +14,14 @@ socket.on('files', function(fileList){
   files = fileList;
   ReactDOM.render(<FileList files={files} />, document.getElementById("file-list"));
 });
-socket.on('fileReq', function(f){
+socket.on('fileReq', fileLoad);
+socket.on('keystroke', fileLoad);
+
+function fileLoad(f){
   observer.disconnect();
   content.innerText = f;
   observer.observe(content, watchConfig);
-});
+}
 
 var watchConfig = {attributes: true, characterData: true, childList: true, subtree: true};
 var observer = new MutationObserver(textChange);
