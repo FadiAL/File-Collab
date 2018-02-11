@@ -34,7 +34,7 @@ io.on('connection', function(socket){
       socket.emit('fileReq', val);
     });
   });
-  socket.on('keystroke', function(id, msg){
+  socket.on('keystroke', function(msg){
     console.log('Socket typed ' + msg);
   });
   socket.on('fileClose', function(id, msg){

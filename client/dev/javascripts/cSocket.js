@@ -5,14 +5,28 @@ import ReactDOM from 'react-dom';
 var files;
 
 var socket = io();
+var content = document.getElementById("file-display");
+
+//Socket events
+
 socket.emit('files', '');
 socket.on('files', function(fileList){
   files = fileList;
   ReactDOM.render(<FileList files={files} />, document.getElementById("file-list"));
 });
 socket.on('fileReq', function(f){
-  document.getElementById("file-display").innerText = f;
+  observer.disconnect();
+  content.innerText = f;
+  observer.observe(content, watchConfig);
 });
+
+var watchConfig = {attributes: true, characterData: true, childList: true, subtree: true};
+var observer = new MutationObserver(textChange);
+observer.observe(content, watchConfig);
+
+function textChange(){
+  socket.emit('keystroke', content.innerText);
+}
 
 //React
 
