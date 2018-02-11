@@ -10,6 +10,9 @@
   border-width: thin;
   margin-top: 3px
 }
+p {
+  outline: 0;
+}
 img {
   vertical-align: middle;
   margin-right: 5px;
