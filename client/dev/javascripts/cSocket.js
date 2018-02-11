@@ -10,6 +10,9 @@ socket.on('files', function(fileList){
   files = fileList;
   ReactDOM.render(<FileList files={files} />, document.getElementById("file-list"));
 });
+socket.on('fileReq', function(f){
+  document.getElementById("file-display").innerText = f;
+});
 
 //React
 
@@ -35,6 +38,7 @@ class FileList extends React.Component {
   }
   handleFileChange(e) {
     this.setState({activeFile: e});
+    socket.emit('fileReq', e);
   }
   render() {
     const files = this.props.files;
