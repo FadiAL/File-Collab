@@ -17,6 +17,11 @@ module.exports = function(redis){
           cb("Error: File not retrieved");
       });
     },
-    setFile : () => {} //TODO: Add method
-  };
+    update : (keyName, newVal) => {
+      redis.exists(keyName, function(err, exists){
+        if(exists)
+          redis.set(keyName, newVal);
+      });
+    }
+  }
 };

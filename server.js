@@ -40,7 +40,7 @@ io.on('connection', function(socket){
   });
   socket.on('keystroke', function(msg){
     socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
-    console.log('Socket typed ' + msg);
+    redisLib.update(rooms[socket.id], msg);
   });
   socket.on('fileClose', function(id, msg){
     console.log('Socket closed file');
