@@ -42,6 +42,13 @@ io.on('connection', function(socket){
     socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
     redisLib.update(rooms[socket.id], msg);
   });
+  socket.on('fileCreate', function(fileName){
+    redisLib.create(fileName, function(){
+      socket.emit('fileTaken', fileName);//Function if name is taken
+    }, function(){
+      io.sockets.emit('fileCreate', fileName);//Function if create works
+    });
+  });
   socket.on('fileClose', function(id, msg){
     console.log('Socket closed file');
   });

@@ -22,6 +22,14 @@ module.exports = function(redis){
         if(exists)
           redis.set(keyName, newVal);
       });
+    },
+    create : (keyName, errCB, okCB) => {
+      redis.exits(keyName, function(err, exists){
+        if(exists)
+          errCB();
+        else
+          redis.set(keyName, '', okCB());
+      });
     }
   }
 };
