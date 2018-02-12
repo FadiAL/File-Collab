@@ -77,5 +77,5 @@ class FileList extends React.Component {
 
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
-  //TODO:Add file creation handling
+  document.getElementById('create-dialog').style.display = 'block';
 });

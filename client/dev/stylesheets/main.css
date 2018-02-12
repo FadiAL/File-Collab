@@ -1,3 +1,44 @@
+h2 {
+  position: relative;
+  margin: auto;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.pure-button-primary {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  left: 50%;
+  bottom: -50px;
+  transform: translate(-50%);
+}
+
+#create-dialog {
+  display: none;
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  background-color: #f0f0f0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  border-width: thin;
+  border-style: solid;
+  border-color: gray;
+  border-radius: 5px;
+}
+
 #toolbar {
   position: relative;
   float: right;
