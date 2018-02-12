@@ -137,7 +137,7 @@ appears on the left side of the page.
         color: #000;
         margin: 0;
     }
-@media (min-width: 48em) {
+@media {
 
     .header,
     .content {
@@ -152,13 +152,6 @@ appears on the left side of the page.
     #menu {
         left: 150px;
     }
-
-    .menu-link {
-        position: fixed;
-        left: 150px;
-        display: none;
-    }
-
     #layout.active .menu-link {
         left: 150px;
     }
