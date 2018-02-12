@@ -11,6 +11,7 @@ input {
   width: 90%;
   margin: auto;
   left: 50%;
+  top: 20%;
   transform: translate(-50%);
 }
 
@@ -29,8 +30,7 @@ input {
   transition-duration: 0.5s;
 }
 
-#create-dialog {
-  display: none;
+.pure-form {
   position: absolute;
   width: 400px;
   height: 200px;
@@ -43,6 +43,14 @@ input {
   border-style: solid;
   border-color: gray;
   border-radius: 5px;
+}
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none;
 }
 
 #toolbar {

@@ -13,6 +13,10 @@ socket.emit('files', '');
 socket.on('files', function(fileList){
   files = fileList;
   ReactDOM.render(<FileList files={files} />, document.getElementById("file-list"));
+  ReactDOM.render(<Dialog visible={false} />, document.getElementById("create-dialog"));
+});
+socket.on('fileCreate', function(fileName){
+  ReactDOM.render(<FileList files = {files} />, document.getElementById("file-list"));
 });
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
@@ -32,6 +36,18 @@ function textChange(){
 }
 
 //React
+
+class Dialog extends React.Component {
+  render() {
+    return(
+    <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")}>
+    <h2>Create File</h2>
+    <input type="text" placeholder="File Name"/>
+    <button type="submit" className="pure-button pure-button-primary">Create</button>
+    </form>
+    )
+  }
+}
 
 class File extends React.Component {
   constructor(props){
@@ -77,12 +93,12 @@ class FileList extends React.Component {
 
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
-  document.getElementById('create-dialog').style.display = 'block';
+  ReactDOM.render(<Dialog visible={true} />, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
   document.querySelector('.content').classList.add('blur');
 });
 function hideDialog(){
-  document.getElementById('create-dialog').style.display = 'none';
+  ReactDOM.render(<Dialog visible={false} />, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };
