@@ -15,6 +15,11 @@ input {
   transform: translate(-50%);
 }
 
+#file-display {
+  min-width: 400px;
+  min-height: 50px;
+}
+
 .pure-button-primary {
   position: relative;
   width: 90%;
