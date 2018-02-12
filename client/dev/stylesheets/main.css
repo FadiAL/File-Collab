@@ -23,6 +23,12 @@ input {
   transform: translate(-50%);
 }
 
+.blur {
+  filter: blur(1px);
+  transition-property: filter;
+  transition-duration: 0.5s;
+}
+
 #create-dialog {
   display: none;
   position: absolute;

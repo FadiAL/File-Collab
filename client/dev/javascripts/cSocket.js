@@ -78,9 +78,13 @@ class FileList extends React.Component {
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
   document.getElementById('create-dialog').style.display = 'block';
+  document.getElementById('menu').classList.add('blur');
+  document.querySelector('.content').classList.add('blur');
 });
 function hideDialog(){
   document.getElementById('create-dialog').style.display = 'none';
+  document.getElementById('menu').classList.remove('blur');
+  document.querySelector('.content').classList.remove('blur');
 };
 document.querySelector('html').addEventListener('click', function(e){
   //Below is to verify that the clicked area is outside the dialog
