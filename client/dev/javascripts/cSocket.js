@@ -16,6 +16,8 @@ socket.on('files', function(fileList){
   ReactDOM.render(<Dialog visible={false} />, document.getElementById("create-dialog"));
 });
 socket.on('fileCreate', function(fileName){
+  files.push(fileName);
+  hideDialog();
   ReactDOM.render(<FileList files = {files} />, document.getElementById("file-list"));
 });
 socket.on('fileReq', fileLoad);
@@ -40,7 +42,7 @@ function textChange(){
 class Dialog extends React.Component {
   render() {
     return(
-    <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")}>
+    <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")} onSubmit={createFile}>
     <h2>Create File</h2>
     <input type="text" placeholder="File Name"/>
     <button type="submit" className="pure-button pure-button-primary">Create</button>
@@ -106,4 +108,9 @@ document.querySelector('html').addEventListener('click', function(e){
   //Below is to verify that the clicked area is outside the dialog
   if(!document.getElementById('create-dialog').contains(e.target) && e.target.id != 'add-file')
     hideDialog();
-})
+});
+function createFile(e){
+  e.preventDefault();
+  socket.emit('fileCreate', document.querySelector('input').value);
+  return false;
+}

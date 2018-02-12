@@ -24,7 +24,7 @@ module.exports = function(redis){
       });
     },
     create : (keyName, errCB, okCB) => {
-      redis.exits(keyName, function(err, exists){
+      redis.exists(keyName, function(err, exists){
         if(exists)
           errCB();
         else
