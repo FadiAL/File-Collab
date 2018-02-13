@@ -14,17 +14,19 @@ var content = document.getElementById("file-display");
 socket.emit('files', '');
 socket.on('files', function(fileList){
   files = fileList;
-  ReactDOM.render(<FileList files={files} socket={socket}/>, document.getElementById("file-list"));
-  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>, document.getElementById("create-dialog"));
+  ReactDOM.render(<FileList files={files} socket={socket}/>,
+                  document.getElementById("file-list"));
+  hideDialog();
 });
 socket.on('fileCreate', function(fileName){
   files.push(fileName);
   hideDialog();
-  ReactDOM.render(<FileList files = {files} socket = {socket}/>
-                  , document.getElementById("file-list"));
+  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
+                  document.getElementById("file-list"));
 });
 socket.on('fileTaken', function(fileName){
-  ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>, document.getElementById("create-dialog"));
+  ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>,
+                  document.getElementById("create-dialog"));
 });
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
@@ -45,12 +47,17 @@ function textChange(){
 
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
-  ReactDOM.render(<Dialog visible={true} createFile={createFile}/>, document.getElementById('create-dialog'));
+  ReactDOM.render(<Dialog visible={true} createFile={createFile}/>,
+                  document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
   document.querySelector('.content').classList.add('blur');
 });
+document.getElementById('remove-file').addEventListener('click', function(){
+  socket.emit('delete', document.querySelector('.pure-menu-selected').innerText);
+});
 function hideDialog(){
-  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>, document.getElementById('create-dialog'));
+  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>,
+                  document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };

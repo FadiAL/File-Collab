@@ -52,6 +52,11 @@ io.on('connection', function(socket){
   socket.on('fileClose', function(id, msg){
     console.log('Socket closed file');
   });
+  socket.on('delete', function(key){
+    redisLib.delete(key, function(){
+      io.sockets.emit('delete', key);
+    });
+  });
 });
 
 //Other Functions
