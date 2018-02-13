@@ -14,15 +14,13 @@ var content = document.getElementById("file-display");
 socket.emit('files', '');
 socket.on('files', function(fileList){
   files = fileList;
-  ReactDOM.render(<FileList files={files} socket={socket}/>,
-                  document.getElementById("file-list"));
+  updateList();
   hideDialog();
 });
 socket.on('fileCreate', function(fileName){
   files.push(fileName);
   hideDialog();
-  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
-                  document.getElementById("file-list"));
+  updateList();
 });
 socket.on('fileTaken', function(fileName){
   ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>,
@@ -30,8 +28,7 @@ socket.on('fileTaken', function(fileName){
 });
 socket.on('delete', function(file){
   files = files.filter(name => name != file);
-  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
-                  document.getElementById("file-list"));
+  updateList();
   content.style.display = "none";
 });
 socket.on('fileReq', fileLoad);
@@ -67,6 +64,10 @@ function hideDialog(){
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };
+function updateList(){
+  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
+                  document.getElementById("file-list"));
+}
 document.querySelector('html').addEventListener('click', function(e){
   //Below is to verify that the clicked area is outside the dialog
   if(!document.getElementById('create-dialog').contains(e.target) && e.target.id != 'add-file')
