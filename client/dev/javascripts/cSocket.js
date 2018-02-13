@@ -32,20 +32,20 @@ socket.on('delete', function(file){
   files = files.filter(name => name != file);
   ReactDOM.render(<FileList files = {files} socket = {socket}/>,
                   document.getElementById("file-list"));
-  fileLoad('');
+  content.style.display = "none";
 });
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
 
 function fileLoad(f){
   observer.disconnect();
+  content.style.display = "block";
   content.innerText = f;
   observer.observe(content, watchConfig);
 }
 
 var watchConfig = {attributes: true, characterData: true, childList: true, subtree: true};
 var observer = new MutationObserver(textChange);
-observer.observe(content, watchConfig);
 
 function textChange(){
   socket.emit('keystroke', content.innerText);
@@ -77,3 +77,5 @@ function createFile(e){
   socket.emit('fileCreate', document.querySelector('input').value);
   return false;
 }
+
+content.style.display = "none";
