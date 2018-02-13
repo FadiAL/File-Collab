@@ -3,7 +3,7 @@ import React from 'react';
 class Dialog extends React.Component {
   render() {
     return(
-    <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")} onSubmit={this.props.createFile}>
+    <form className="pure-form pure-form-stacked" onSubmit={this.props.createFile}>
     <h2>Create File</h2>
     {
       this.props.error &&

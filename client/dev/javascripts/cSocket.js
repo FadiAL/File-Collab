@@ -23,7 +23,7 @@ socket.on('fileCreate', function(fileName){
   updateList();
 });
 socket.on('fileTaken', function(fileName){
-  ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>,
+  ReactDOM.render(<Dialog error={fileName} createFile={createFile}/>,
                   document.getElementById("create-dialog"));
 });
 socket.on('delete', function(file){
@@ -50,7 +50,7 @@ function textChange(){
 
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
-  ReactDOM.render(<Dialog visible={true} createFile={createFile}/>,
+  ReactDOM.render(<Dialog createFile={createFile}/>,
                   document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
   document.querySelector('.content').classList.add('blur');
@@ -59,8 +59,7 @@ document.getElementById('remove-file').addEventListener('click', function(){
   socket.emit('delete', document.querySelector('.pure-menu-selected').innerText);
 });
 function hideDialog(){
-  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>,
-                  document.getElementById('create-dialog'));
+  ReactDOM.render(null, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };
