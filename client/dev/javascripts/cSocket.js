@@ -28,6 +28,12 @@ socket.on('fileTaken', function(fileName){
   ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>,
                   document.getElementById("create-dialog"));
 });
+socket.on('delete', function(file){
+  files = files.filter(name => name != file);
+  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
+                  document.getElementById("file-list"));
+  fileLoad('');
+});
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
 
