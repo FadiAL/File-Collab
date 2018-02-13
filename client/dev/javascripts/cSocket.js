@@ -20,6 +20,9 @@ socket.on('fileCreate', function(fileName){
   hideDialog();
   ReactDOM.render(<FileList files = {files} />, document.getElementById("file-list"));
 });
+socket.on('fileTaken', function(fileName){
+  ReactDOM.render(<Dialog visible={true} error={fileName} />, document.getElementById("create-dialog"));
+});
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
 
@@ -44,6 +47,10 @@ class Dialog extends React.Component {
     return(
     <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")} onSubmit={createFile}>
     <h2>Create File</h2>
+    {
+      this.props.error &&
+        <h5>Error, file name {this.props.error} taken</h5>
+    }
     <input type="text" placeholder="File Name"/>
     <button type="submit" className="pure-button pure-button-primary">Create</button>
     </form>
