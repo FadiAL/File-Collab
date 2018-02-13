@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FileList from './rFile.jsx';
+import Dialog from './rDialog.jsx';
 
 var files;
 
@@ -14,7 +15,7 @@ socket.emit('files', '');
 socket.on('files', function(fileList){
   files = fileList;
   ReactDOM.render(<FileList files={files} socket={socket}/>, document.getElementById("file-list"));
-  ReactDOM.render(<Dialog visible={false} />, document.getElementById("create-dialog"));
+  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>, document.getElementById("create-dialog"));
 });
 socket.on('fileCreate', function(fileName){
   files.push(fileName);
@@ -23,7 +24,7 @@ socket.on('fileCreate', function(fileName){
                   , document.getElementById("file-list"));
 });
 socket.on('fileTaken', function(fileName){
-  ReactDOM.render(<Dialog visible={true} error={fileName} />, document.getElementById("create-dialog"));
+  ReactDOM.render(<Dialog visible={true} error={fileName} createFile={createFile}/>, document.getElementById("create-dialog"));
 });
 socket.on('fileReq', fileLoad);
 socket.on('keystroke', fileLoad);
@@ -42,32 +43,14 @@ function textChange(){
   socket.emit('keystroke', content.innerText);
 }
 
-//React
-
-class Dialog extends React.Component {
-  render() {
-    return(
-    <form className={"pure-form pure-form-stacked " + (this.props.visible ? "visible" : "invisible")} onSubmit={createFile}>
-    <h2>Create File</h2>
-    {
-      this.props.error &&
-        <h5>Error, file name {this.props.error} taken</h5>
-    }
-    <input type="text" placeholder="File Name"/>
-    <button type="submit" className="pure-button pure-button-primary">Create</button>
-    </form>
-    )
-  }
-}
-
 //Other
 document.getElementById('add-file').addEventListener('click', function(){
-  ReactDOM.render(<Dialog visible={true} />, document.getElementById('create-dialog'));
+  ReactDOM.render(<Dialog visible={true} createFile={createFile}/>, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
   document.querySelector('.content').classList.add('blur');
 });
 function hideDialog(){
-  ReactDOM.render(<Dialog visible={false} />, document.getElementById('create-dialog'));
+  ReactDOM.render(<Dialog visible={false} createFile={createFile}/>, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };
