@@ -8,7 +8,6 @@ module.exports = function(redis){
         cb(val);
       });
     },
-    getIf : () => {}, //TODO: Add method
     getFile : (keyName, cb) => {
       redis.get(keyName, (err, val) => {
         if(!err)
@@ -18,18 +17,21 @@ module.exports = function(redis){
       });
     },
     update : (keyName, newVal) => {
-      redis.exists(keyName, function(err, exists){
+      redis.exists(keyName, (err, exists) => {
         if(exists)
           redis.set(keyName, newVal);
       });
     },
     create : (keyName, errCB, okCB) => {
-      redis.exists(keyName, function(err, exists){
+      redis.exists(keyName, (err, exists) => {
         if(exists)
           errCB();
         else
           redis.set(keyName, '', okCB());
       });
+    },
+    delete : (keyName, cb) => {
+      redis.del(keyName, cb);
     }
   }
 };
