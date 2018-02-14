@@ -18,7 +18,13 @@ class File extends React.Component {
 class FileList extends React.Component {
   constructor(props){
     super(props);
-    this.state = {activeFile: ''}
+    this.state = {activeFile: '', presetActive: false}
+  }
+  componentDidUpdate() {
+    if(!this.state.presetActive && this.props.activeFile != '' && this.props.activeFile != this.state.activeFile){
+      this.state.presetActive = true;
+      this.handleFileChange(this.props.activeFile);
+    }
   }
   handleFileChange(e) {
     this.setState({activeFile: e});
