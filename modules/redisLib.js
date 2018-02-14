@@ -36,6 +36,21 @@ module.exports = function(redis){
     delete : (keyName, cb) => {
       redis.del(keyName, cb);
       redis.srem(setName, keyName);
+    },
+    purge : () => {
+      redis.keys('*', (err, vals) => {
+        //The one filter to rule them all
+        vals = vals.filter(key => key.indexOf('key:__rand')).filter(key => key != setName);
+        for(var i = 0; i < vals.length; i++){
+          redis.sadd('tempList', vals[i]);
+        }
+        redis.sdiff('tempList', [setName], (err, keys) => {
+          for(var i = 0; i < keys.length; i++){
+            console.log(keys);
+          }
+        });
+        //And in the darkness del them
+      });
     }
   }
 };
