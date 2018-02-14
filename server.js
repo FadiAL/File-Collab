@@ -64,12 +64,3 @@ io.on('connection', function(socket){
 client.on('error', function (err) {
   console.log('Error ' + err)
 });
-
-populateTest = () => {
-  client.set('file1', 'kmfldamfeawfea');
-  client.set('file2', 'jfknfjknefawfe');
-  client.set('file3', 'iokopkpwdopqko');
-  client.set('file4', 'fadzfvdvfdvxvd');
-};
-
-populateTest();
