@@ -43,7 +43,7 @@ module.exports = function(redis){
     delete : (keyName, cb) => {
       redis.del(keyName, cb);
       redis.srem(setName, keyName);
-      redis.lrem(listName, keyName);
+      redis.lrem(listName, -10, keyName);
     },
     purge : () => {
       redis.keys('*', (err, vals) => {
