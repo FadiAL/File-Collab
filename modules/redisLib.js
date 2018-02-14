@@ -1,10 +1,11 @@
 //A collection of methods for reading and writing redis files
 
+var setName = 'files';
+
 module.exports = function(redis){
   return {
     getAll : cb => {
-      redis.keys('*', (err, val) => {
-        val = val.filter(name => name.indexOf('key:') < 0);
+      redis.smembers(setName, (err, val) => {
         cb(val);
       });
     },
@@ -26,12 +27,15 @@ module.exports = function(redis){
       redis.exists(keyName, (err, exists) => {
         if(exists)
           errCB();
-        else
-          redis.set(keyName, '', okCB());
+        else {
+          redis.sadd(setName, keyName, okCB);//Adds the file to the set as ref
+          redis.set(keyName, '');//Adds actual file contents
+        }
       });
     },
     delete : (keyName, cb) => {
       redis.del(keyName, cb);
+      redis.srem(setName, keyName);
     }
   }
 };
