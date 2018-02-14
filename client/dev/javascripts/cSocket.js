@@ -56,7 +56,7 @@ document.getElementById('add-file').addEventListener('click', function(){
   document.querySelector('.content').classList.add('blur');
 });
 document.getElementById('remove-file').addEventListener('click', function(){
-  socket.emit('delete', document.querySelector('.pure-menu-selected').innerText);
+  socket.emit('delete', /[a-zA-Z0-9]+/.exec(document.querySelector('.pure-menu-selected').innerText)[0]);
 });
 function hideDialog(){
   ReactDOM.render(null, document.getElementById('create-dialog'));
