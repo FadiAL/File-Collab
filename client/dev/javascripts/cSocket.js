@@ -9,8 +9,6 @@ var files;
 
 var socket = io();
 var content = document.getElementById("file-display");
-ReactDOM.render(<Toolbar fileAdd={fileAdd} fileDelete={fileDelete}/>,
-                document.getElementById("header"));
 
 //Socket events
 
@@ -19,6 +17,8 @@ socket.on('files', function(fileList){
   files = fileList;
   updateList();
   hideDialog();
+  ReactDOM.render(<Toolbar fileAdd={fileAdd}/>,
+    document.getElementById("header"));
 });
 socket.on('fileCreate', function(fileName){
   files.push(fileName);
@@ -35,7 +35,11 @@ socket.on('delete', function(file){
   updateList();
   content.style.display = "none";
 });
-socket.on('fileReq', fileLoad);
+socket.on('fileReq', function(fileContents){
+  fileLoad(fileContents);
+  ReactDOM.render(<Toolbar fileAdd={fileAdd} fileDelete={fileDelete}/>,
+                  document.getElementById("header"));
+});
 socket.on('keystroke', fileLoad);
 
 function fileLoad(f){
@@ -61,6 +65,8 @@ function fileAdd() {
 };
 function fileDelete() {
   socket.emit('delete', /[a-zA-Z0-9]+/.exec(document.querySelector('.pure-menu-selected').innerText)[0]);
+  ReactDOM.render(<Toolbar fileAdd={fileAdd}/>,
+    document.getElementById("header"));
 };
 function hideDialog(){
   ReactDOM.render(null, document.getElementById('create-dialog'));
