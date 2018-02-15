@@ -9,7 +9,8 @@ var files;
 
 var socket = io();
 var content = document.getElementById("file-display");
-ReactDOM.render(<Toolbar />, document.getElementById("header"));
+ReactDOM.render(<Toolbar fileAdd={fileAdd} fileDelete={fileDelete}/>,
+                document.getElementById("header"));
 
 //Socket events
 
@@ -52,15 +53,15 @@ function textChange(){
 }
 
 //Other
-/*document.getElementById('add-file').addEventListener('click', function(){
+function fileAdd() {
   ReactDOM.render(<Dialog createFile={createFile}/>,
                   document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
   document.querySelector('.content').classList.add('blur');
-});
-document.getElementById('remove-file').addEventListener('click', function(){
+};
+function fileDelete() {
   socket.emit('delete', /[a-zA-Z0-9]+/.exec(document.querySelector('.pure-menu-selected').innerText)[0]);
-});*/
+};
 function hideDialog(){
   ReactDOM.render(null, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
