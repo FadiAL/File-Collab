@@ -1,11 +1,11 @@
 import React from 'react';
-import Content from './rContent';
-import Toolbar form './rToolbar';
+import Content from './rContent.jsx';
+import Toolbar from './rToolbar.jsx';
 
 class MainPanel extends React.Component {
   render() {
     return (
-        <div class="content">
+      <div className="content">
         <Toolbar fileAdd={this.props.fileAdd}/>
         <br/>
         <Content text=""/>
@@ -13,3 +13,5 @@ class MainPanel extends React.Component {
     )
   }
 }
+
+export default MainPanel;
