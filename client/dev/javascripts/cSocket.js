@@ -20,7 +20,8 @@ socket.on('files', function(fileList){
 socket.on('fileCreate', function(fileName){
   files.push(fileName);
   hideDialog();
-  updateList();
+  updateList(fileName);
+
 });
 socket.on('fileTaken', function(fileName){
   ReactDOM.render(<Dialog error={fileName} createFile={createFile}/>,
@@ -63,8 +64,8 @@ function hideDialog(){
   document.getElementById('menu').classList.remove('blur');
   document.querySelector('.content').classList.remove('blur');
 };
-function updateList(){
-  ReactDOM.render(<FileList files = {files} socket = {socket}/>,
+function updateList(activeFile = ''){
+  ReactDOM.render(<FileList files = {files} socket = {socket} activeFile = {activeFile}/>,
                   document.getElementById("file-list"));
 }
 document.querySelector('html').addEventListener('click', function(e){
