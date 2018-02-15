@@ -3,11 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FileList from './rFile.jsx';
 import Dialog from './rDialog.jsx';
+import Toolbar from './rToolbar.jsx';
 
 var files;
 
 var socket = io();
 var content = document.getElementById("file-display");
+ReactDOM.render(<Toolbar />, document.getElementById("header"));
 
 //Socket events
 
@@ -50,7 +52,7 @@ function textChange(){
 }
 
 //Other
-document.getElementById('add-file').addEventListener('click', function(){
+/*document.getElementById('add-file').addEventListener('click', function(){
   ReactDOM.render(<Dialog createFile={createFile}/>,
                   document.getElementById('create-dialog'));
   document.getElementById('menu').classList.add('blur');
@@ -58,7 +60,7 @@ document.getElementById('add-file').addEventListener('click', function(){
 });
 document.getElementById('remove-file').addEventListener('click', function(){
   socket.emit('delete', /[a-zA-Z0-9]+/.exec(document.querySelector('.pure-menu-selected').innerText)[0]);
-});
+});*/
 function hideDialog(){
   ReactDOM.render(null, document.getElementById('create-dialog'));
   document.getElementById('menu').classList.remove('blur');
