@@ -1,5 +1,10 @@
 import React from 'react';
-
+/*
+This component renders the file tree view
+It takes in a socket object and uses it to populate the list
+In addition, a function can be passed to handle file selections
+It automatically handles file creations and deletions
+*/
 class File extends React.Component {
   constructor(props){
     super(props);
@@ -22,12 +27,14 @@ class FileList extends React.Component {
     this.state = {activeFile: '', files: []};
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.activeFile != '')
+    if(nextProps.activeFile != '' && this.props.activeFile != nextProps.activeFile){
       this.handleFileChange(nextProps.activeFile);
+    }
   }
   handleFileChange(e) {
     this.setState({activeFile: e});
     this.props.socket.emit('fileReq', e);
+    this.props.onFileChange(e);
   }
   setupSocket(socket) {
     socket.emit('files');
@@ -37,6 +44,10 @@ class FileList extends React.Component {
     socket.on('fileCreate', fileName => {
       var newFiles = this.state.files;
       newFiles.push(fileName);
+      this.setState({files: newFiles});
+    });
+    socket.on('delete', fileDeleted => {
+      var newFiles = this.state.files.filter(fileName => fileName != fileDeleted);
       this.setState({files: newFiles});
     });
   }
