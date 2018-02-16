@@ -6,7 +6,7 @@ import FileList from './rFile.jsx';
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {curFile: null};
+    this.state = {curFile: null, curFileName: null};
   }
   onFileSelected(fileName) {
     this.setState({curFileName: fileName});
@@ -19,12 +19,12 @@ class MainPanel extends React.Component {
       <div id="layout">
         <div id="menu">
           <div className="pure-menu" id="file-list">
-            <FileList socket={this.props.socket} onFileChange={() => {this.onFileSelected}}/>
+            <FileList socket={this.props.socket} onFileChange={(n) => {this.onFileSelected(n)}}/>
           </div>
         </div>
         <div className="content">
           <Toolbar fileAdd={this.props.fileAdd}
-                    fileDelete={(this.state.curFile || this.state.curFile === "") ? this.handleDelete : undefined}/>
+                    fileDelete={this.state.curFileName ? this.handleDelete : undefined}/>
           <br/>
           <Content socket={this.props.socket}/>
         </div>
