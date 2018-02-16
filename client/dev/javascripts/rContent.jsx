@@ -10,9 +10,13 @@ class Content extends React.Component {
     socket.on('fileReq', fileContent => {
       this.setState({text: fileContent, active: true});
     });
+    socket.on('keystroke', newText => {
+      this.setState({text: newText});
+    });
   }
   handleChange(e) {
     this.setState({text: e.target.value});
+    this.props.socket.emit('keystroke', e.target.value);
   }
   render() {
     if(!this.state.active)
