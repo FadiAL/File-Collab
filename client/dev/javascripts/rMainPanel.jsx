@@ -7,12 +7,6 @@ class MainPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {curFile: null};
-    this.setupSocket(this.props.socket);
-  }
-  setupSocket(socket) {
-    socket.on('fileReq', file => {
-      this.setState({curFile: file});
-    });
   }
   onFileSelected(fileName) {
     this.setState({curFileName: fileName});
@@ -32,9 +26,7 @@ class MainPanel extends React.Component {
           <Toolbar fileAdd={this.props.fileAdd}
                     fileDelete={(this.state.curFile || this.state.curFile === "") ? this.handleDelete : undefined}/>
           <br/>
-          {this.state.curFile &&
-            <Content text={this.state.curFile}/>
-          }
+          <Content socket={this.props.socket}/>
         </div>
       </div>
     )
