@@ -11,14 +11,16 @@ class Content extends React.Component {
       this.setState({text: fileContent, active: true});
     });
   }
+  handleChange(e) {
+    this.setState({text: e.target.value});
+  }
   render() {
     if(!this.state.active)
       return null;
     else{
       return (
-        <p id="file-display" contentEditable="true">
-          {this.state.text}
-        </p>
+        <textarea id="file-display" value={this.state.text} onChange={e => this.handleChange(e)}>
+        </textarea>
       )
     }
   }
