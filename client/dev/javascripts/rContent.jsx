@@ -13,6 +13,9 @@ class Content extends React.Component {
     socket.on('keystroke', newText => {
       this.setState({text: newText});
     });
+    socket.on('deletedOpen',() => {
+      this.setState({active: false});
+    });
   }
   handleChange(e) {
     this.setState({text: e.target.value});
