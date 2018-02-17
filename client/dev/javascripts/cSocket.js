@@ -10,22 +10,30 @@ var socket = io();
 
 //Socket events
 
-ReactDOM.render(<MainPanel socket={socket} fileAdd={fileAdd}/>, document.getElementById('root'));
-
 socket.on('fileTaken', function(fileName){
   ReactDOM.render(<Dialog error={fileName} createFile={createFile}/>,
                   document.getElementById("create-dialog"));
 });
+socket.on('currentFileCreated', function(fileName){
+  hideDialog();
+});
 
 //Other
+
+ReactDOM.render(<MainPanel socket={socket} fileAdd={fileAdd} fileDelete={fileDelete}/>,
+                document.getElementById('root'));
 
 function fileAdd() {
   ReactDOM.render(<Dialog createFile={createFile}/>,
                   document.getElementById('create-dialog'));
+  document.getElementById('root').classList.add('blur');
 };
+function fileDelete(fileName) {
+  socket.emit('delete', fileName);
+}
 function hideDialog(){
   ReactDOM.render(null, document.getElementById('create-dialog'));
-  document.getElementById('menu').classList.remove('blur');
+  document.getElementById('root').classList.remove('blur');
 };
 document.querySelector('html').addEventListener('click', function(e){
   //Below is to verify that the clicked area is outside the dialog
