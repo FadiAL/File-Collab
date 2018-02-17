@@ -12,9 +12,16 @@ class MainPanel extends React.Component {
     this.setState({curFileName: fileName});
   }
   handleDelete() {
+    this.setState({curFileName: null});
     this.props.fileDelete(this.state.curFileName);
   }
   render() {
+    const fileOpen = this.state.curFileName;
+    var toolbar;
+    if(fileOpen)
+      toolbar = <Toolbar fileAdd={() => this.props.fileAdd()} fileDelete={() => this.handleDelete()}/>;
+    else
+      toolbar = <Toolbar fileAdd={() => this.props.fileAdd()}/>;
     return (
       <div id="layout">
         <div id="menu">
@@ -23,8 +30,7 @@ class MainPanel extends React.Component {
           </div>
         </div>
         <div className="content">
-          <Toolbar fileAdd={this.props.fileAdd}
-                    fileDelete={this.state.curFileName ? this.handleDelete : undefined}/>
+          {toolbar}
           <br/>
           <Content socket={this.props.socket}/>
         </div>
