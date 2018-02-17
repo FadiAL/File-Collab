@@ -50,6 +50,9 @@ class FileList extends React.Component {
       var newFiles = this.state.files.filter(fileName => fileName != fileDeleted);
       this.setState({files: newFiles});
     });
+    socket.on('currentFileCreated', fileName => {
+      this.setState({activeFile: fileName});
+    });
   }
   render() {
     const files = this.state.files;

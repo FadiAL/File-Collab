@@ -6,7 +6,10 @@ import FileList from './rFile.jsx';
 class MainPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {curFile: null, curFileName: null};
+    this.state = {curFileName: null};
+    this.props.socket.on('currentFileCreated', fileName => {
+      this.setState({curFileName: fileName});
+    });
   }
   onFileSelected(fileName) {
     this.setState({curFileName: fileName});

@@ -16,6 +16,7 @@ socket.on('fileTaken', function(fileName){
 });
 socket.on('currentFileCreated', function(fileName){
   hideDialog();
+  socket.emit('fileReq', fileName);
 });
 
 //Other
@@ -24,9 +25,9 @@ ReactDOM.render(<MainPanel socket={socket} fileAdd={fileAdd} fileDelete={fileDel
                 document.getElementById('root'));
 
 function fileAdd() {
+  document.getElementById('root').classList.add('blur');
   ReactDOM.render(<Dialog createFile={createFile}/>,
                   document.getElementById('create-dialog'));
-  document.getElementById('root').classList.add('blur');
 };
 function fileDelete(fileName) {
   socket.emit('delete', fileName);
