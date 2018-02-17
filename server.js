@@ -47,6 +47,7 @@ io.on('connection', function(socket){
       socket.emit('fileTaken', fileName);//Function if name is taken
     }, function(){
       io.sockets.emit('fileCreate', fileName);//Function if create works
+      socket.emit('currentFileCreated', fileName);//Function to send to user that created the file
     });
   });
   socket.on('fileClose', function(id, msg){
