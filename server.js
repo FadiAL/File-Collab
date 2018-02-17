@@ -55,6 +55,7 @@ io.on('connection', function(socket){
   socket.on('delete', function(key){
     redisLib.delete(key, function(){
       io.sockets.emit('delete', key);
+      io.to(rooms[socket.id]).emit('deletedOpen');
     });
   });
 });
