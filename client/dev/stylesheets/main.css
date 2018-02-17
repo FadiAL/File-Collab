@@ -67,14 +67,6 @@ html, body, #layout, .content{
   border-radius: 5px;
 }
 
-.visible {
-  display: block;
-}
-
-.invisible {
-  display: none;
-}
-
 #toolbar {
   position: relative;
   float: right;
