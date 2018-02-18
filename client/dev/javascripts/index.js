@@ -21,6 +21,7 @@ socket.on('currentFileCreated', function(fileName){
 
 //Other
 
+//Render main view
 ReactDOM.render(<MainPanel socket={socket} fileAdd={fileAdd} fileDelete={fileDelete}/>,
                 document.getElementById('root'));
 

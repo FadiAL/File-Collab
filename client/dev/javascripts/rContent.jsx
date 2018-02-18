@@ -1,5 +1,11 @@
 import React from 'react';
 
+/*
+This component handles rendering of the file data
+It takes in a socket object, and handles updating of the text
+In addition, it empties the file upon deletion, and opens one upon a request
+*/
+
 class Content extends React.Component {
   constructor(props) {
     super(props);

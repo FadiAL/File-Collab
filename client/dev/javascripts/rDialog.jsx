@@ -1,5 +1,10 @@
 import React from 'react';
 
+/*
+This component simply renders a dialog to create a file
+If given error text, it will display that as well
+*/
+
 class Dialog extends React.Component {
   componentDidMount() {
     this.fileInput.focus();
