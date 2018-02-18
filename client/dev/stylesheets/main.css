@@ -4,6 +4,7 @@ h2{
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: #aaa;
 }
 h5{
   color: red;
@@ -28,6 +29,7 @@ input {
   border-color: white;
   border-width: 0px;
   color: #9999aa;
+  -webkit-appearance: none;
 }
 
 html, body, #layout, .content{
@@ -58,7 +60,7 @@ html, body, #layout, .content{
   position: absolute;
   width: 400px;
   max-height: 200px;
-  background-color: #f0f0f0;
+  background-color: #333333;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
