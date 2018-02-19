@@ -1,5 +1,10 @@
 import React from 'react';
-
+/*
+This component renders the file tree view
+It takes in a socket object and uses it to populate the list
+In addition, a function can be passed to handle file selections
+It automatically handles file creations and deletions
+*/
 class File extends React.Component {
   constructor(props){
     super(props);
@@ -18,19 +23,39 @@ class File extends React.Component {
 class FileList extends React.Component {
   constructor(props){
     super(props);
-    this.state = {activeFile: ''}
-    //Preset active is to avoid constantly resetting state
+    this.setupSocket(this.props.socket);
+    this.state = {activeFile: '', files: []};
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.activeFile != '')
+    if(nextProps.activeFile != '' && this.props.activeFile != nextProps.activeFile){
       this.handleFileChange(nextProps.activeFile);
+    }
   }
   handleFileChange(e) {
     this.setState({activeFile: e});
     this.props.socket.emit('fileReq', e);
+    this.props.onFileChange(e);
+  }
+  setupSocket(socket) {
+    socket.emit('files');
+    socket.on('files', files => {
+      this.setState({files: files});
+    });
+    socket.on('fileCreate', fileName => {
+      var newFiles = this.state.files;
+      newFiles.push(fileName);
+      this.setState({files: newFiles});
+    });
+    socket.on('delete', fileDeleted => {
+      var newFiles = this.state.files.filter(fileName => fileName != fileDeleted);
+      this.setState({files: newFiles});
+    });
+    socket.on('currentFileCreated', fileName => {
+      this.setState({activeFile: fileName});
+    });
   }
   render() {
-    const files = this.props.files;
+    const files = this.state.files;
     const list = files.map(
       file => <File
        name={file} onFileSelected={(e) => this.handleFileChange(e)}
