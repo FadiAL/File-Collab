@@ -29,8 +29,10 @@ Babel primarily works to convert the ES6 code to ES5.  It is used as a loader in
   * "fileReq": Response to the fileReq request - A requested file and its contents
   * "keystroke": Response to the keystroke request - An update to the file text contents"
   * "fileCreate": Response to the fileCreate request - File successfully created
+  * "currentFileCreated": Response to the fileCreate request - Tells creator client that it was successful
   * "fileTaken": Response to the fileCreate request - File name taken
   * "delete": Response to the delete request - File deleted
+  * "deletedOpen": Response to the delete request - Deletion of file sent to sockets accessing it
 
 ## Future Plans
 * Use of Redux to manage state
