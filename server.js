@@ -1,25 +1,15 @@
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var log = require('morgan');
-var redis = require('redis');
-var socket = require('socket.io');
+const express = require('express');
+const http = require('http');
+const redis = require('redis');
 
 var app = express();
-var client = require('./config/redis.js');
+var client = redis.createClient();
+var server = http.createServer(app);
 
 const PORT = process.env.PORT || 8080;
 
-var server = http.createServer(app);
-var io = socket(server);
-
-require('./config/express.js')(app);
-require('./config/socket.js')(server, client);
+require('./config/redis.js')(client);//Mainly logging
+require('./config/express.js')(app);//Configuring middleware
+require('./config/socket.js')(server, client);//Setting up socket events
 
 server.listen(PORT);
-
-//Other Functions
-
-client.on('error', function (err) {
-  console.log('Error ' + err)
-});
