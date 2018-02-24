@@ -1,4 +1,8 @@
-const redis = require('redis');
-
-var client  = redis.createClient();
-module.exports = client;
+module.exports = function(client) {
+  client.on('error', function(err) {
+    console.log(err);
+  });
+  client.on('connect', function() {
+    console.log("Redis connected to server");
+  });
+}
