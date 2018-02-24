@@ -6,17 +6,15 @@ var redis = require('redis');
 var socket = require('socket.io');
 
 var app = express();
-var client = redis.createClient();
-var redisLib = require('./modules/redisLib.js')(client);
-
-var rooms = {};
+var client = require('./config/redis.js');
 
 const PORT = process.env.PORT || 8080;
 
 var server = http.createServer(app);
+var io = socket(server);
 
 require('./config/express.js')(app);
-require('./config/socket.js')(server, socket);
+require('./config/socket.js')(server, client);
 
 server.listen(PORT);
 
