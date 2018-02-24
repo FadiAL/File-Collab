@@ -1,7 +1,11 @@
-require('socket.io');
+const socket = require('socket.io');
 
-module.exports = function(server, socket) {
-  io = socket(server);
+var rooms = {};
+
+module.exports = function(server, client) {
+  const redisLib = require('../modules/redisLib')(client);
+  
+  var io = socket(server);
 
   io.on('connection', function(socket){
     socket.on('files', function(){
