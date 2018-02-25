@@ -6,15 +6,15 @@ var recentsLength = 10;
 
 module.exports = function(redis){
   return {
-    getAll : cb => {
+    getAll : cb => {//Gets all redis members from the set
       redis.smembers(setName, (err, val) => {
         cb(val);
       });
     },
-    getRecent: cb => {
+    getRecent: cb => {//Gets the last 10 members from the set
       redis.lrange(listName, 0, -1, cb);
     },
-    getFile : (keyName, cb) => {
+    getFile : (keyName, cb) => {//Gets the contents of a file
       redis.get(keyName, (err, val) => {
         if(!err)
           cb(val);
@@ -22,13 +22,13 @@ module.exports = function(redis){
           cb("Error: File not retrieved");
       });
     },
-    update : (keyName, newVal) => {
+    update : (keyName, newVal) => {//Updates an existing file
       redis.exists(keyName, (err, exists) => {
         if(exists)
           redis.set(keyName, newVal);
       });
     },
-    create : (keyName, errCB, okCB) => {
+    create : (keyName, errCB, okCB) => {//Creates a new file
       redis.exists(keyName, (err, exists) => {
         if(exists)
           errCB();
@@ -40,12 +40,12 @@ module.exports = function(redis){
         }
       });
     },
-    delete : (keyName, cb) => {
+    delete : (keyName, cb) => {//Deletes a file
       redis.del(keyName, cb);
       redis.srem(setName, keyName);
       redis.lrem(listName, -10, keyName);
     },
-    purge : () => {
+    purge : () => {//Removes all files that are not in the master set
       redis.keys('*', (err, vals) => {
         //The one filter to rule them all
         vals = vals.filter(key => key.indexOf('key:__rand')).filter(key => key != setName);
