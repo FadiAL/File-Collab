@@ -23,7 +23,11 @@ class Toolbar extends React.Component {
         <img id="add-file" src="icons/plus.png" onClick={() => this.props.fileAdd()}/>
         {this.state.fileOpen &&
           <img id="remove-file" src="icons/delete.png" onClick={() => this.props.fileDelete()}/>
+        }{
+          this.state.fileOpen && 
+          <img id="back" src="icons/back.png" onClick={() => this.props.back()}/>
         }
+
       </div>
     )
   }
