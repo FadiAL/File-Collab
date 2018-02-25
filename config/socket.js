@@ -4,7 +4,7 @@ var rooms = {};
 
 module.exports = function(server, client) {
   const redisLib = require('../modules/redisLib')(client);
-  
+
   var io = socket(server);
 
   io.on('connection', function(socket){
@@ -19,6 +19,10 @@ module.exports = function(server, client) {
         rooms[socket.id] = msg;
         socket.emit('fileReq', val);
       });
+    });
+    socket.on('fileLeave', function(){
+      socket.leave(rooms[socket.id]);
+      rooms[socket.id] = undefined;
     });
     socket.on('keystroke', function(msg){
       socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
