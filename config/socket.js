@@ -22,7 +22,7 @@ module.exports = function(server, client) {
     });
     socket.on('fileLeave', function(){
       socket.leave(rooms[socket.id]);
-      rooms[socket.id] = undefined;
+      delete rooms[socket.id];
     });
     socket.on('keystroke', function(msg){
       socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
