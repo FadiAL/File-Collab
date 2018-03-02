@@ -25,6 +25,10 @@ class MainPanel extends React.Component {
     this.setState({curFileName: null});
     this.props.fileDelete(this.state.curFileName);
   }
+  handleBack() {
+    socket.emit('fileLeave');
+    this.setState({curFileName: null});
+  }
   render() {
     return (
       <div id="layout">
@@ -36,7 +40,7 @@ class MainPanel extends React.Component {
         <div className="content">
           <br/>
           <Content socket={this.props.socket}/>
-          <Toolbar socket={this.props.socket} fileAdd={() => this.props.fileAdd()} fileDelete={() => this.handleDelete()}/>
+          <Toolbar socket={this.props.socket} fileAdd={() => this.props.fileAdd()} fileDelete={() => this.handleDelete()} back={() => this.handleBack()}/>
         </div>
       </div>
     )
