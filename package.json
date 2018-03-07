@@ -30,6 +30,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redis": "^2.8.0",
+    "redux": "^3.7.2",
     "socket.io": "^2.0.4"
   },
   "devDependencies": {
