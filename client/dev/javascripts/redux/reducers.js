@@ -20,27 +20,27 @@ function fileApp (state = initialState, action) {
   switch (action.type) {
     case SET_FILE_NAME:
       Object.assign({}, state, Object.assign({}, state.file, {
-        fileName: action.newName;
+        fileName: action.newName
       }));
       break;
     case SET_FILE_CONTENTS:
       Object.assign({}, state, Object.assign({}, state.file, {
-        fileContents: action.newContents;
+        fileContents: action.newContents
       }));
       break;
     case SET_FILE_OPEN:
       Object.assign({}, state, Object.assign({}, state.file, {
-        fileOpen: !state.file.fileOpen;
+        fileOpen: !state.file.fileOpen
       }));
       break;
     case UPDATE_RECENTS:
       Object.assign({}, state, {
-        recents: action.newList;
+        recents: action.newList
       });
       break;
     case UPDATE_FILES:
       Object.assign({}, state, {
-        files: action.newFiles;
+        files: action.newFiles
       });
       break;
   }
