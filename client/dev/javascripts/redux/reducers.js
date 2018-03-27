@@ -1,49 +1,45 @@
 import {
-  SET_FILE_NAME,
-  SET_FILE_OPEN,
-  SET_FILE_CONTENTS,
-  UPDATE_RECENTS,
-  UPDATE_FILES
+  REQUEST_FILE,
+  REQUEST_FILES,
+  RECIEVE_FILE,
+  RECIEVE_FILES,
+  RECIEVE_RECENTS
 } from './actions.js'
 
 const initialState = {
-  file: {
-    fileName: null,
-    fileContents: null,
-    fileOpen: false
-  },
+  fileOpen: false,
+  loading: true,
   recents: [],
   files: []
 }
 
 function fileApp (state = initialState, action) {
   switch (action.type) {
-    case SET_FILE_NAME:
-      console.log("SETFILENAME called", action.newName);
-      return Object.assign({}, state, Object.assign({}, state.file, {
-        fileName: action.newName
-      }));
-      break;
-    case SET_FILE_CONTENTS:
-      return Object.assign({}, state, Object.assign({}, state.file, {
-        fileContents: action.newContents
-      }));
-      break;
-    case SET_FILE_OPEN:
-      return Object.assign({}, state, Object.assign({}, state.file, {
-        fileOpen: !state.file.fileOpen
-      }));
-      break;
-    case UPDATE_RECENTS:
+    case REQUEST_FILE:
       return Object.assign({}, state, {
-        recents: action.newList
-      });
-      break;
-    case UPDATE_FILES:
+        loading: true,
+        fileOpen: true
+      })
+    case REQUEST_FILES:
       return Object.assign({}, state, {
-        files: action.newFiles
-      });
-      break;
+        loading: true,
+        fileOpen: false
+      })
+    case RECIEVE_FILE:
+      return Object.assign({}, state, {
+        file: {
+          action.fileName,
+          action.fileContents
+        }
+      })
+    case RECIEVE_FILES:
+      return Object.assign({}, state, {
+        files: action.files
+      })
+    case RECIEVE_RECENTS:
+      return Object.assign({}, state, {
+        recents: action.recents
+      })
   }
   return state;
 }
