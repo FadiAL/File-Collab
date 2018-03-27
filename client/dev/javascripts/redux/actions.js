@@ -1,23 +1,44 @@
 //action types
-export const SET_FILE_NAME = "SET_FILE_NAME";
-export const SET_FILE_CONTENTS = "SET_FILE_CONTENTS";
-export const UPDATE_RECENTS = "UPDATE_RECENTS";
-export const UPDATE_FILES = "UPDATE_FILES";
-export const SET_FILE_OPEN = "SET_FILE_OPEN";
+export const REQUEST_FILES = "REQUEST_FILES";
+export const REQUEST_FILE = "REQUEST_FILE";
+export const RECIEVE_FILE = "RECIEVE_FILE";
+export const RECIEVE_FILES = "RECIEVE_FILES";
+export const RECIEVE_RECENTS = "UPDATE_RECENTS";
+export const LEAVE_FILE = "LEAVE_FILE";
 
 //action creators
-export function changeFileName (newName){
-  return {type: SET_FILE_NAME, newName}
-}
-export function changeFileContents (newContents) {
-  return {type: SET_FILE_CONTENTS, newContents}
-}
-export function updateRecents (newList) {
-  return {type: UPDATE_RECENTS, newList}
-}
-export function updateFiles (newFiles) {
-  return {type: UPDATE_FILES, newFiles}
-}
-export function toggleFileOpen () {
-  return {type: SET_FILE_OPEN}
-}
+
+function requestFiles() {
+  return {
+    type: REQUEST_FILES
+  }
+};
+function requestFile(file) {
+  return {
+    type: REQUEST_FILE,
+    file
+  }
+};
+function recieveFiles(files) {
+  return {
+    type: RECIEVE_FILES,
+    files
+  }
+};
+function recieveFile(file) {
+  return {
+    type: RECIEVE_FILE,
+    file
+  }
+};
+function recieveRecents(recents) {
+  return {
+    type: RECIEVE_RECENTS,
+    recents
+  }
+};
+function leaveFile() {
+  return {
+    type: LEAVE_FILE
+  }
+};
