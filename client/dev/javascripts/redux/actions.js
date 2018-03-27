@@ -4,7 +4,6 @@ export const REQUEST_FILE = "REQUEST_FILE";
 export const RECIEVE_FILE = "RECIEVE_FILE";
 export const RECIEVE_FILES = "RECIEVE_FILES";
 export const RECIEVE_RECENTS = "UPDATE_RECENTS";
-export const LEAVE_FILE = "LEAVE_FILE";
 
 //action creators
 
@@ -25,20 +24,16 @@ function recieveFiles(files) {
     files
   }
 };
-function recieveFile(file) {
+function recieveFile(data) {
   return {
     type: RECIEVE_FILE,
-    file
+    fileName: data.fileName,
+    fileContents: data.fileContents
   }
 };
 function recieveRecents(recents) {
   return {
     type: RECIEVE_RECENTS,
     recents
-  }
-};
-function leaveFile() {
-  return {
-    type: LEAVE_FILE
   }
 };
