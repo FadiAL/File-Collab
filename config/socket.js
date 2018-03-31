@@ -36,9 +36,6 @@ module.exports = function(server, client) {
         socket.emit('currentFileCreated', fileName);//Function to send to user that created the file
       });
     });
-    socket.on('fileClose', function(id, msg){
-      console.log('Socket closed file');
-    });
     socket.on('delete', function(key){
       redisLib.delete(key, function(){
         io.sockets.emit('delete', key);
