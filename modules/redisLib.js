@@ -12,7 +12,9 @@ module.exports = function(redis){
       });
     },
     getRecent: cb => {//Gets the last 10 members from the set
-      redis.lrange(listName, 0, -1, cb);
+      redis.lrange(listName, 0, -1, (err, val) => {
+        cb(val);
+      });
     },
     getFile : (keyName, cb) => {//Gets the contents of a file
       redis.get(keyName, (err, val) => {
