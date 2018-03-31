@@ -8,6 +8,7 @@ module.exports = function(server, client) {
   var io = socket(server);
 
   io.on('connection', function(socket){
+    sendInitData(socket);
     socket.on('files', function(){
       redisLib.getAll(function(val){
         socket.emit('files', val);
@@ -43,4 +44,13 @@ module.exports = function(server, client) {
       });
     });
   });
+
+  function sendInitData(socket) {
+    redisLib.getRecent(function(recents){
+      socket.emit('recentFiles', recents);
+    });
+    redisLib.getAll(function(files){
+      socket.emit('files', files);
+    });
+  }
 }
