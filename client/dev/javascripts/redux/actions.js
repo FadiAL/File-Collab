@@ -5,6 +5,7 @@ export const RECIEVE_FILE = "RECIEVE_FILE";
 export const RECIEVE_FILES = "RECIEVE_FILES";
 export const RECIEVE_RECENTS = "UPDATE_RECENTS";
 export const RECIEVE_CREATED_FILE = "RECIEVE_CREATED_FILE";
+export const TOGGLE_CREATING_FILE = "TOGGLE_CREATING_FILE";
 //action creators
 
 function requestFiles() {
@@ -41,5 +42,10 @@ function recieveCreatedFile(file) {
   return {
     type: RECIEVE_CREATED_FILE,
     file
+  }
+};
+function toggleCreatingFile() {
+  return {
+    type: TOGGLE_CREATING_FILE
   }
 };

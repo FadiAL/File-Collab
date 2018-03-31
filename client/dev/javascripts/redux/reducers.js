@@ -4,12 +4,14 @@ import {
   RECIEVE_FILE,
   RECIEVE_FILES,
   RECIEVE_RECENTS,
-  RECIEVE_CREATED_FILE
+  RECIEVE_CREATED_FILE,
+  TOGGLE_CREATING_FILE
 } from './actions.js'
 
 const initialState = {
   fileOpen: false,
   loading: true,
+  creatingFile: false,
   recents: [],
   files: []
 }
@@ -51,6 +53,10 @@ function fileApp (state = initialState, action) {
     case RECIEVE_RECENTS:
       return Object.assign({}, state, {
         recents: action.recents
+      })
+    case TOGGLE_CREATING_FILE:
+      return Object.assign({}, state, {
+        creatingFile: !state.creatingFile
       })
   }
   return state;
