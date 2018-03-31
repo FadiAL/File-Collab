@@ -4,7 +4,7 @@ export const REQUEST_FILE = "REQUEST_FILE";
 export const RECIEVE_FILE = "RECIEVE_FILE";
 export const RECIEVE_FILES = "RECIEVE_FILES";
 export const RECIEVE_RECENTS = "UPDATE_RECENTS";
-
+export const RECIEVE_CREATED_FILE = "RECIEVE_CREATED_FILE";
 //action creators
 
 function requestFiles() {
@@ -35,5 +35,11 @@ function recieveRecents(recents) {
   return {
     type: RECIEVE_RECENTS,
     recents
+  }
+};
+function revieveCreatedFile(file) {
+  return {
+    type: RECIEVE_CREATED_FILE,
+    file
   }
 };

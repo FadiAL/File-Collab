@@ -3,7 +3,8 @@ import {
   REQUEST_FILES,
   RECIEVE_FILE,
   RECIEVE_FILES,
-  RECIEVE_RECENTS
+  RECIEVE_RECENTS,
+  RECIEVE_CREATED_FILE
 } from './actions.js'
 
 const initialState = {
@@ -31,6 +32,17 @@ function fileApp (state = initialState, action) {
           action.fileName,
           action.fileContents
         }
+      })
+    case RECIEVE_CREATED_FILE:
+      var nRecents = state.recents.slice(0, -1);
+      nRecents.push(action.file);
+
+      return Object.assign({}, state, {
+        nRecents,
+        files: [
+          ...state.files,
+          action.file
+        ]
       })
     case RECIEVE_FILES:
       return Object.assign({}, state, {
