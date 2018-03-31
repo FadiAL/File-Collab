@@ -37,7 +37,7 @@ function recieveRecents(recents) {
     recents
   }
 };
-function revieveCreatedFile(file) {
+function recieveCreatedFile(file) {
   return {
     type: RECIEVE_CREATED_FILE,
     file
