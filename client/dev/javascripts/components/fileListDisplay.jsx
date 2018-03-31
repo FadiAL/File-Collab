@@ -3,7 +3,7 @@ import React from 'react';
 class FileList extends React.Component {
   render() {
     let list = this.props.files.map(file =>
-      <li className="pure-menu-item">{file.name}</li>)
+      <li className="pure-menu-item">{file}</li>)
     return (
       <div id="file-display">
         <div className="pure-menu">
