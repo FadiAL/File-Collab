@@ -19,20 +19,20 @@ function requestFile(file) {
     file
   }
 };
-function recieveFiles(files) {
+export function recieveFiles(files) {
   return {
     type: RECIEVE_FILES,
     files
   }
 };
-function recieveFile(data) {
+export function recieveFile(data) {
   return {
     type: RECIEVE_FILE,
     fileName: data.fileName,
     fileContents: data.fileContents
   }
 };
-function recieveRecents(recents) {
+export function recieveRecents(recents) {
   return {
     type: RECIEVE_RECENTS,
     recents
