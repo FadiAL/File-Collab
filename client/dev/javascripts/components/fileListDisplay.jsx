@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class FileList extends React.Component {
   render() {
@@ -15,3 +16,12 @@ class FileList extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  files: state.files
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(FileList);

@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Toolbar extends React.Component {
   render() {
@@ -15,3 +16,12 @@ class Toolbar extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  fileOpen: state.fileOpen
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Toolbar);
