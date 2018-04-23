@@ -11,8 +11,8 @@ export function setupSocket(store) {
   socket.on('files', files => {
     store.dispatch(recieveFiles(files));
   });
-  socket.on('fileReq', file => {
-    store.dispatch(recieveFile(file));
+  socket.on('fileReq', (fileName, fileContents) => {
+    store.dispatch(recieveFile(fileName, fileContents));
   });
   socket.on('recentFiles', recents => {
     store.dispatch(recieveRecents(recents));

@@ -12,10 +12,16 @@ const initialState = {
   fileOpen: false,
   loading: true,
   creatingFile: false,
+  file: {
+    name: "",
+    contents: ""
+  },
   recents: [],
   files: []
 }
-
+function setupReducer(socket){
+  return fileApp;
+}
 function fileApp (state = initialState, action) {
   switch (action.type) {
     case REQUEST_FILE:
@@ -31,8 +37,9 @@ function fileApp (state = initialState, action) {
     case RECIEVE_FILE:
       return Object.assign({}, state, {
         file: {
-          action.fileName,
-          action.fileContents
+          name: action.fileName,
+          contents: action.fileContents,
+          loading: false,
         }
       })
     case RECIEVE_CREATED_FILE:
@@ -48,7 +55,8 @@ function fileApp (state = initialState, action) {
       })
     case RECIEVE_FILES:
       return Object.assign({}, state, {
-        files: action.files
+        files: action.files,
+        loading: false
       })
     case RECIEVE_RECENTS:
       return Object.assign({}, state, {
