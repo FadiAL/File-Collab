@@ -8,12 +8,12 @@ export const RECIEVE_CREATED_FILE = "RECIEVE_CREATED_FILE";
 export const TOGGLE_CREATING_FILE = "TOGGLE_CREATING_FILE";
 //action creators
 
-function requestFiles() {
+export function requestFiles() {
   return {
     type: REQUEST_FILES
   }
 };
-function requestFile(file) {
+export function requestFile(file) {
   return {
     type: REQUEST_FILE,
     file
