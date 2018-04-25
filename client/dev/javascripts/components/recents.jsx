@@ -1,15 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import File from './file.jsx';
+import {requestFile} from '../redux/actions.js';
 
 class Recents extends React.Component {
   render() {
     let list = this.props.files.map(file =>
-      <File name={file} active={file === this.props.activeFile}/>)
+      <File name={file} active={file === this.props.activeFile} onClick={() => this.props.onFileSelected(file)}/>)
     return (
       <div className="pure-menu">
         <a className="pure-menu-heading">
-          Recent Files
+          Recents
         </a>
         <ul className="pure-menu-list">
           {list}
@@ -23,8 +24,11 @@ const mapStateToProps = state => ({
   activeFile: state.file.name,
   files: state.recents
 });
+const mapDispatchToProps = dispatch => ({
+  onFileSelected: file => dispatch(requestFile(file))
+});
 
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Recents);
