@@ -18,7 +18,7 @@ module.exports = function(server, client) {
       redisLib.getFile(msg, function(val){
         socket.join(msg);
         rooms[socket.id] = msg;
-        socket.emit('fileReq', val);
+        socket.emit('fileReq', {fileName: msg, fileContents: val});
       });
     });
     socket.on('fileLeave', function(){

@@ -25,11 +25,11 @@ export function recieveFiles(files) {
     files
   }
 };
-export function recieveFile(data) {
+export function recieveFile(name, content) {
   return {
     type: RECIEVE_FILE,
-    fileName: data.fileName,
-    fileContents: data.fileContents
+    fileName: name,
+    fileContents: content
   }
 };
 export function recieveRecents(recents) {
