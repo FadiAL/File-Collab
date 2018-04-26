@@ -1,7 +1,7 @@
 import React from 'react';
 import Toolbar from './toolbar.jsx';
 import Recents from './recents.jsx';
-import FileList from './fileListDisplay.jsx';
+import MainPanel from './mainPanel.jsx';
 
 class App extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class App extends React.Component {
         </div>
         <div className="content">
           <br/>
-          <FileList/>
+          <MainPanel/>
           <Toolbar/>
         </div>
       </div>
