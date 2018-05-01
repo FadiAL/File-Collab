@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Dialog extends React.Component {
   render() {
@@ -14,3 +15,5 @@ class Dialog extends React.Component {
     )
   }
 }
+
+export default Dialog;
