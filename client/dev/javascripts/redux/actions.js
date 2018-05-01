@@ -6,6 +6,11 @@ export const RECIEVE_FILES = "RECIEVE_FILES";
 export const RECIEVE_RECENTS = "UPDATE_RECENTS";
 export const RECIEVE_CREATED_FILE = "RECIEVE_CREATED_FILE";
 export const TOGGLE_CREATING_FILE = "TOGGLE_CREATING_FILE";
+export const UPDATE_FILE = "UPDATE_FILE";
+export const DELETE_REQUEST = "DELETE_REQUEST";
+export const CREATE_REQUEST = "CREATE_REQUEST";
+export const ACTIVE_FILE_DELETED = "ACTIVE_FILE_DELETED";
+export const FILE_DELETED = "FILE_DELETED";
 //action creators
 
 export function requestFiles() {
@@ -38,14 +43,42 @@ export function recieveRecents(recents) {
     recents
   }
 };
-function recieveCreatedFile(file) {
+export function recieveCreatedFile(file) {
   return {
     type: RECIEVE_CREATED_FILE,
     file
   }
 };
-function toggleCreatingFile() {
+export function toggleCreatingFile() {
   return {
     type: TOGGLE_CREATING_FILE
   }
 };
+export function updateFile(file) {
+  return {
+    type: UPDATE_FILE,
+    file
+  }
+};
+export function deleteRequest(fileName) {
+  return {
+    type: DELETE_REQUEST,
+    fileName
+  }
+};
+export function createRequest(fileName) {
+  return {
+    type: CREATE_REQUEST,
+    fileName
+  }
+}
+export function activeFileDeleted() {
+  return {
+    type: ACTIVE_FILE_DELETED
+  }
+};
+export function fileDeleted(fileName) {
+  return {
+    type: FILE_DELETED
+  }
+}
