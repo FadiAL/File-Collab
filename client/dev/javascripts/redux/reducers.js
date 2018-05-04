@@ -5,7 +5,12 @@ import {
   RECIEVE_FILES,
   RECIEVE_RECENTS,
   RECIEVE_CREATED_FILE,
-  TOGGLE_CREATING_FILE
+  TOGGLE_CREATING_FILE,
+  UPDATE_FILE,
+  DELETE_REQUEST,
+  CREATE_REQUEST,
+  ACTIVE_FILE_DELETED,
+  FILE_DELETED
 } from './actions.js'
 
 const initialState = {
@@ -32,7 +37,11 @@ function fileApp (state = initialState, action) {
     case REQUEST_FILES:
       return Object.assign({}, state, {
         loading: true,
-        fileOpen: false
+        fileOpen: false,
+        file: {
+          name: "",
+          contents: ""
+        }
       })
     case RECIEVE_FILE:
       return Object.assign({}, state, {
@@ -45,7 +54,6 @@ function fileApp (state = initialState, action) {
     case RECIEVE_CREATED_FILE:
       var nRecents = state.recents.slice(0, -1);
       nRecents.push(action.file);
-
       return Object.assign({}, state, {
         nRecents,
         files: [
@@ -65,6 +73,34 @@ function fileApp (state = initialState, action) {
     case TOGGLE_CREATING_FILE:
       return Object.assign({}, state, {
         creatingFile: !state.creatingFile
+      })
+    case UPDATE_FILE:
+      return Object.assign({}, state, {
+        file: {
+          name: state.file.name,
+          contents: action.file
+        }
+      })
+    case DELETE_REQUEST:
+      return Object.assign({}, state);
+    case CREATE_REQUEST:
+      return Object.assign({}, state, {
+        creatingFile: false
+      })
+    case ACTIVE_FILE_DELETED:
+      return Object.assign({}, state, {
+        fileOpen: false,
+        file: {
+          fileName: "",
+          fileContents: ""
+        }
+      })
+    case FILE_DELETED:
+      var nRecents = state.recents.splice();
+      var nFiles = state.files.splice();
+      return Object.assign({}, state, {
+        recents: nRecents,
+        files: nFiles
       })
   }
   return state;

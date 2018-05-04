@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {updateFile} from '../redux/actions.js';
 
 class FileEditor extends React.Component {
   render() {
@@ -13,8 +14,10 @@ class FileEditor extends React.Component {
 const mapStateToProps = state => ({
   text: state.file.contents
 });
-
+const mapDispatchToProps = dispatch => ({
+  textChange: e => dispatch(updateFile(e.target.value))
+})
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(FileEditor);
