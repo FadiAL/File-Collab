@@ -22,7 +22,7 @@ class Recents extends React.Component {
 
 const mapStateToProps = state => ({
   activeFile: state.file.name,
-  files: state.recents
+  files: state.list.recents
 });
 const mapDispatchToProps = dispatch => ({
   onFileSelected: file => dispatch(requestFile(file))

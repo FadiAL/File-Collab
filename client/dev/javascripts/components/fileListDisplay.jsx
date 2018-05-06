@@ -19,7 +19,7 @@ class FileList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  files: state.files
+  files: state.list.files
 });
 const mapDispatchToProps = dispatch => ({
   onFileSelected: file => dispatch(requestFile(file))

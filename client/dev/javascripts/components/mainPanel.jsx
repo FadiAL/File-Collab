@@ -19,7 +19,7 @@ class MainPanel extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  fileOpen: state.fileOpen
+  fileOpen: state.status.fileOpen
 });
 
 export default connect(

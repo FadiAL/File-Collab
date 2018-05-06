@@ -24,7 +24,7 @@ class Toolbar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  fileOpen: state.fileOpen,
+  fileOpen: state.status.fileOpen,
   fileName: state.file.name
 });
 const mapDispatchToProps = dispatch => ({

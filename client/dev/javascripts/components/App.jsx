@@ -40,7 +40,7 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  creatingFile: state.creatingFile
+  creatingFile: state.status.creatingFile
 });
 const mapDispatchToProps = dispatch => ({
   onCancelCreate: () => dispatch(toggleCreatingFile())
