@@ -1,7 +1,8 @@
 import {
   recieveFiles,
   recieveFile,
-  recieveRecents
+  recieveRecents,
+  updateFile
 } from '../redux/actions.js';
 
 export function setupSocket(socket, store) {
@@ -14,5 +15,8 @@ export function setupSocket(socket, store) {
   });
   socket.on('recentFiles', recents => {
     store.dispatch(recieveRecents(recents));
+  });
+  socket.on('keystroke', file => {
+    store.dispatch(updateFile(file));
   });
 }
