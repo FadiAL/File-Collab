@@ -11,6 +11,8 @@ export const DELETE_REQUEST = "DELETE_REQUEST";
 export const CREATE_REQUEST = "CREATE_REQUEST";
 export const ACTIVE_FILE_DELETED = "ACTIVE_FILE_DELETED";
 export const FILE_DELETED = "FILE_DELETED";
+export const DIALOG_FILENAME_UPDATE = "DIALOG_FILENAME_UPDATE";
+export const DIALOG_ERROR = "DIALOG_ERROR";
 //action creators
 
 export function requestFiles() {
@@ -80,5 +82,17 @@ export function activeFileDeleted() {
 export function fileDeleted(fileName) {
   return {
     type: FILE_DELETED
+  }
+};
+export function updateDialogFilename(fileName) {
+  return {
+    type: DIALOG_FILENAME_UPDATE,
+    fileName
+  }
+};
+export function dialogError(error) {
+  return {
+    type: DIALOG_ERROR,
+    error
   }
 }
