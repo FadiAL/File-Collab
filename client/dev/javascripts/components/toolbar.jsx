@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {requestFiles, toggleCreatingFile} from '../redux/actions.js';
+import {requestFiles, toggleCreatingFile, deleteRequest} from '../redux/actions.js';
 
 class Toolbar extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class Toolbar extends React.Component {
         <div id="buttons">
           <img id="add-file" src="icons/plus.png" onClick={() => this.props.addFile()}/>
           {this.props.fileOpen &&
-            <img id="remove-file" src="icons/delete.png" onClick={() => this.props.deleteFile()}/>
+            <img id="remove-file" src="icons/delete.png" onClick={() => this.props.deleteFile(this.props.fileName)}/>
           }
           {this.props.fileOpen &&
             <img id="remove-file" src="icons/back.png" onClick={() => this.props.leaveFile()}/>
@@ -29,8 +29,9 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   leaveFile: () => dispatch(requestFiles()),
-  addFile: () => dispatch(toggleCreatingFile())
-})
+  addFile: () => dispatch(toggleCreatingFile()),
+  deleteFile: curFile => dispatch(deleteRequest(curFile))
+});
 export default connect(
   mapStateToProps,
   mapDispatchToProps

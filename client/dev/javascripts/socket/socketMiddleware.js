@@ -7,7 +7,8 @@ import {
   RECIEVE_CREATED_FILE,
   TOGGLE_CREATING_FILE,
   UPDATE_FILE,
-  DELETE_REQUEST
+  DELETE_REQUEST,
+  CREATE_REQUEST
 } from '../redux/actions.js';
 
 const socketMiddlewareCreator = function(socket) {
@@ -27,6 +28,10 @@ const socketMiddlewareCreator = function(socket) {
         return;
       case DELETE_REQUEST:
         socket.emit('delete', action.fileName);
+        next(action);
+        return;
+      case CREATE_REQUEST:
+        socket.emit('fileCreate', action.fileName);
         next(action);
         return;
       default:

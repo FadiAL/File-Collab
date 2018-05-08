@@ -4,7 +4,7 @@ export const REQUEST_FILE = "REQUEST_FILE";
 export const RECIEVE_FILE = "RECIEVE_FILE";
 export const RECIEVE_FILES = "RECIEVE_FILES";
 export const RECIEVE_RECENTS = "UPDATE_RECENTS";
-export const RECIEVE_CREATED_FILE = "RECIEVE_CREATED_FILE";
+export const ADD_FILE = "ADD_FILE";
 export const TOGGLE_CREATING_FILE = "TOGGLE_CREATING_FILE";
 export const UPDATE_FILE = "UPDATE_FILE";
 export const DELETE_REQUEST = "DELETE_REQUEST";
@@ -45,9 +45,9 @@ export function recieveRecents(recents) {
     recents
   }
 };
-export function recieveCreatedFile(file) {
+export function addFile(file) {
   return {
-    type: RECIEVE_CREATED_FILE,
+    type: ADD_FILE,
     file
   }
 };
@@ -81,7 +81,8 @@ export function activeFileDeleted() {
 };
 export function fileDeleted(fileName) {
   return {
-    type: FILE_DELETED
+    type: FILE_DELETED,
+    fileName
   }
 };
 export function updateDialogFilename(fileName) {

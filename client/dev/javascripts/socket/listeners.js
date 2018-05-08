@@ -2,7 +2,11 @@ import {
   recieveFiles,
   recieveFile,
   recieveRecents,
-  updateFile
+  updateFile,
+  addFile,
+  requestFile,
+  activeFileDeleted,
+  fileDeleted
 } from '../redux/actions.js';
 
 export function setupSocket(socket, store) {
@@ -18,5 +22,19 @@ export function setupSocket(socket, store) {
   });
   socket.on('keystroke', file => {
     store.dispatch(updateFile(file));
+  });
+  socket.on('currentFileCreated', fileName => {
+    store.dispatch(addFile(fileName));
+    store.dispatch(requestFile(fileName));
+  });
+  socket.on('fileCreate', fileName => {
+    store.dispatch(addFile(fileName));
+  });
+  socket.on('deletedOpen', () => {
+    store.dispatch(fileDeleted(store.getState().file.name));
+    store.dispatch(activeFileDeleted());
+  });
+  socket.on('fileDeleted', key => {
+    store.dispatch(fileDeleted(key));
   });
 }
