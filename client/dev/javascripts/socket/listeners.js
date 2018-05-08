@@ -6,7 +6,8 @@ import {
   addFile,
   requestFile,
   activeFileDeleted,
-  fileDeleted
+  fileDeleted,
+  dialogError
 } from '../redux/actions.js';
 
 export function setupSocket(socket, store) {
@@ -37,4 +38,7 @@ export function setupSocket(socket, store) {
   socket.on('fileDeleted', key => {
     store.dispatch(fileDeleted(key));
   });
+  socket.on('fileTaken', fileName => {
+    store.dispatch(dialogError(fileName));
+  })
 }

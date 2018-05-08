@@ -5,7 +5,8 @@ import {
   RECIEVE_FILES,
   TOGGLE_CREATING_FILE,
   ACTIVE_FILE_DELETED,
-  CREATE_REQUEST
+  CREATE_REQUEST,
+  DIALOG_ERROR
 } from './actions.js';
 
 function statusReducer(status, action) {
@@ -37,6 +38,12 @@ function statusReducer(status, action) {
       return Object.assign({}, status, {
         creatingFile: false
       });
+    case DIALOG_ERROR:
+      return Object.assign({}, status, {
+        creatingFile: true,
+        fileOpen: false,
+        loading: false
+      })
     default:
       return status;
   }
