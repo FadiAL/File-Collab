@@ -1,11 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {requestFile} from '../redux/actions.js';
+import FileListItem from './fileListItem.jsx';
 
 class FileList extends React.Component {
   render() {
     let list = this.props.files.map(file =>
-      <li className="pure-menu-item" onClick={() => this.props.onFileSelected(file)}>{file}</li>)
+      <li className="pure-menu-item" onClick={() => this.props.onFileSelected(file)}>
+        <FileListItem name={file}/>
+      </li>
+      )
     return (
       <div id="file-display">
         <div className="pure-menu">
