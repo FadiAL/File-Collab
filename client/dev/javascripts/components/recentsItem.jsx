@@ -1,6 +1,6 @@
 import React from 'react';
 
-class File extends React.Component {
+class RecentsItem extends React.Component {
   render() {
     return (
       <li className={"pure-menu-item" + (this.props.active ? "pure-menu-selected" : "")} onClick={this.props.onClick}>
@@ -12,4 +12,4 @@ class File extends React.Component {
   }
 }
 
-export default File;
+export default RecentsItem;

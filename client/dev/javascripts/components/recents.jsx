@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import File from './file.jsx';
+import RecentsItem from './recentsItem.jsx';
 import {requestFile} from '../redux/actions.js';
 
 class Recents extends React.Component {
   render() {
     let list = this.props.files.map(file =>
-      <File name={file} active={file === this.props.activeFile} onClick={() => this.props.onFileSelected(file)}/>)
+      <RecentsItem name={file} active={file === this.props.activeFile} onClick={() => this.props.onFileSelected(file)}/>)
     return (
       <div className="pure-menu">
         <a className="pure-menu-heading">
