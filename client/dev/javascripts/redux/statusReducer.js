@@ -6,7 +6,8 @@ import {
   TOGGLE_CREATING_FILE,
   ACTIVE_FILE_DELETED,
   CREATE_REQUEST,
-  DIALOG_ERROR
+  DIALOG_ERROR,
+  CLOSE_FILE
 } from './actions.js';
 
 function statusReducer(status, action) {
@@ -18,8 +19,7 @@ function statusReducer(status, action) {
       });
     case REQUEST_FILES:
       return Object.assign({}, status, {
-        loading: true,
-        fileOpen: false
+        loading: !fileOpen,
       });
     case RECIEVE_FILE:
     case RECIEVE_FILES:
@@ -43,7 +43,13 @@ function statusReducer(status, action) {
         creatingFile: true,
         fileOpen: false,
         loading: false
-      })
+      });
+    case CLOSE_FILE:
+      return Object.assign({}, status, {
+        fileOpen: false,
+        loading: false,
+        creatingFile: false
+      });
     default:
       return status;
   }

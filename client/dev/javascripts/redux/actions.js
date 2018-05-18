@@ -13,7 +13,14 @@ export const ACTIVE_FILE_DELETED = "ACTIVE_FILE_DELETED";
 export const FILE_DELETED = "FILE_DELETED";
 export const DIALOG_FILENAME_UPDATE = "DIALOG_FILENAME_UPDATE";
 export const DIALOG_ERROR = "DIALOG_ERROR";
+export const CLOSE_FILE = "CLOSE_FILE";
 //action creators
+
+export function closeFile() {
+  return {
+    type: CLOSE_FILE
+  }
+};
 
 export function requestFiles() {
   return {

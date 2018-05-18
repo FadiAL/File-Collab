@@ -2,7 +2,8 @@ import {
   RECIEVE_FILE,
   UPDATE_FILE,
   ACTIVE_FILE_DELETED,
-  REQUEST_FILES
+  REQUEST_FILES,
+  CLOSE_FILE
 } from './actions.js';
 
 function fileReducer(file, action) {
@@ -22,11 +23,11 @@ function fileReducer(file, action) {
         name: "",
         contents: ""
       });
-    case REQUEST_FILES:
+    case CLOSE_FILE:
       return Object.assign({}, file, {
         name: "",
         contents: ""
-      });
+      })
     default:
       return file;
   }

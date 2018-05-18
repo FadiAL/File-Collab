@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {requestFiles, toggleCreatingFile, deleteRequest} from '../redux/actions.js';
+import {toggleCreatingFile, deleteRequest, closeFile} from '../redux/actions.js';
 
 class Toolbar extends React.Component {
   render() {
@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
   fileName: state.file.name
 });
 const mapDispatchToProps = dispatch => ({
-  leaveFile: () => dispatch(requestFiles()),
+  leaveFile: () => dispatch(closeFile()),
   addFile: () => dispatch(toggleCreatingFile()),
   deleteFile: curFile => dispatch(deleteRequest(curFile))
 });
