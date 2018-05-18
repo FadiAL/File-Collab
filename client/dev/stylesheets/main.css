@@ -7,6 +7,14 @@
   left: 10px;
   top: 5px;
 }
+.file-list-item{
+  transition: background-color 1s, color 1s;
+  padding: 10px;
+}
+.file-list-item:hover{
+  background-color: #bbb;
+  color: #000
+}
 h2{
   position: relative;
   margin: auto;
