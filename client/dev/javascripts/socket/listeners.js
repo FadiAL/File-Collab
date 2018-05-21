@@ -28,14 +28,11 @@ export function setupSocket(socket, store) {
     store.dispatch(addFile(fileName));
     store.dispatch(requestFile(fileName));
   });
-  socket.on('fileCreate', fileName => {
-    store.dispatch(addFile(fileName));
-  });
   socket.on('deletedOpen', () => {
     store.dispatch(fileDeleted(store.getState().file.name));
     store.dispatch(activeFileDeleted());
   });
-  socket.on('fileDeleted', key => {
+  socket.on('delete', key => {
     store.dispatch(fileDeleted(key));
   });
   socket.on('fileTaken', fileName => {
