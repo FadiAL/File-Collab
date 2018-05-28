@@ -4,10 +4,11 @@ var rooms = {};
 
 module.exports = function(server, client) {
   const redisLib = require('../modules/redisLib')(client);
-  
+
   var io = socket(server);
 
   io.on('connection', function(socket){
+    sendInitData(socket);
     socket.on('files', function(){
       redisLib.getAll(function(val){
         socket.emit('files', val);
@@ -17,8 +18,12 @@ module.exports = function(server, client) {
       redisLib.getFile(msg, function(val){
         socket.join(msg);
         rooms[socket.id] = msg;
-        socket.emit('fileReq', val);
+        socket.emit('fileReq', {fileName: msg, fileContents: val});
       });
+    });
+    socket.on('fileLeave', function(){
+      socket.leave(rooms[socket.id]);
+      delete rooms[socket.id];
     });
     socket.on('keystroke', function(msg){
       socket.broadcast.to(rooms[socket.id]).emit('keystroke', msg);
@@ -32,9 +37,6 @@ module.exports = function(server, client) {
         socket.emit('currentFileCreated', fileName);//Function to send to user that created the file
       });
     });
-    socket.on('fileClose', function(id, msg){
-      console.log('Socket closed file');
-    });
     socket.on('delete', function(key){
       redisLib.delete(key, function(){
         io.sockets.emit('delete', key);
@@ -42,4 +44,13 @@ module.exports = function(server, client) {
       });
     });
   });
+
+  function sendInitData(socket) {
+    redisLib.getRecent(function(recents){
+      socket.emit('recentFiles', recents);
+    });
+    redisLib.getAll(function(files){
+      socket.emit('files', files);
+    });
+  }
 }

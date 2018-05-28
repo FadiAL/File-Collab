@@ -21,6 +21,7 @@ Babel primarily works to convert the ES6 code to ES5.  It is used as a loader in
 * **Requests:**
   * "files": Request all files on the server
   * "fileReq": Request a file by name, giving its contents
+  * "fileLeave": Request to leave the file it is subscribed to
   * "keystroke": Request an update for a file because the user typed on it
   * "fileCreate": Request the creation of a new file with a given name
   * "delete": Request the deletion of a given file

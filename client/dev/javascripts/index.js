@@ -1,51 +1,24 @@
-import io from 'socket.io-client';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Dialog from './rDialog.jsx';
-import MainPanel from './rMainPanel.jsx';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import fileApp from './redux/reducers.js';
+import {setupSocket} from './socket/listeners.js';
+import App from './components/App.jsx';
+import socketMiddlewareCreator from './socket/socketMiddleware.js';
+import io from 'socket.io-client';
 
-var files;
+const socket = io();
 
-var socket = io();
+const sMiddleware = socketMiddlewareCreator(socket);
 
-//Socket events
+const store = createStore(fileApp, applyMiddleware(sMiddleware));
 
-socket.on('fileTaken', function(fileName){
-  ReactDOM.render(<Dialog error={fileName} createFile={createFile}/>,
-                  document.getElementById("create-dialog"));
-});
-socket.on('currentFileCreated', function(fileName){
-  hideDialog();
-  socket.emit('fileReq', fileName);
-});
+setupSocket(socket, store);
 
-//Other
-
-//Render main view
-ReactDOM.render(<MainPanel socket={socket} fileAdd={fileAdd} fileDelete={fileDelete}/>,
-                document.getElementById('root'));
-
-function fileAdd() {
-  document.getElementById('root').classList.add('blur');
-  ReactDOM.render(<Dialog createFile={createFile}/>,
-                  document.getElementById('create-dialog'));
-};
-function fileDelete(fileName) {
-  socket.emit('delete', fileName);
-}
-function hideDialog(){
-  ReactDOM.render(null, document.getElementById('create-dialog'));
-  document.getElementById('root').classList.remove('blur');
-};
-document.querySelector('html').addEventListener('click', function(e){
-  //Below is to verify that the clicked area is outside the dialog
-  if(!document.getElementById('create-dialog').contains(e.target) && e.target.id != 'add-file')
-    hideDialog();
-});
-function createFile(e){
-  e.preventDefault();
-  socket.emit('fileCreate', document.querySelector('input').value);
-  return false;
-}
-
-//content.style.display = "none";
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);

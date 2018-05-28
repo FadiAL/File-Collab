@@ -1,3 +1,20 @@
+#main {
+  height: 100%;
+  width: 100;
+}
+#back {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+}
+.file-list-item{
+  transition: background-color 1s, color 1s;
+  padding: 10px;
+}
+.file-list-item:hover{
+  background-color: #bbb;
+  color: #000
+}
 h2{
   position: relative;
   margin: auto;
@@ -75,7 +92,6 @@ html, body, #layout, .content{
 
 #toolbar {
   position: fixed;
-  float: right;
   top: 0px;
   left: 180px;
   right: 30px;
@@ -87,6 +103,15 @@ html, body, #layout, .content{
   border-style: solid;
   border-width: thin;
   margin-top: 3px
+}
+#toolbarFilename {
+  left: 185px;
+  color: #000;
+  display: inline;
+  position: fixed;
+}
+#buttons {
+  float: right;
 }
 img {
   vertical-align: middle;
