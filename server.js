@@ -13,3 +13,4 @@ require('./config/express.js')(app);//Configuring middleware
 require('./config/socket.js')(server, client);//Setting up socket events
 
 server.listen(PORT);
+module.exports = server;
