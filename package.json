@@ -20,7 +20,8 @@
   "homepage": "https://github.com/FadiAL/File-Collab#readme",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "mocha test/socket.test.js"
   },
   "dependencies": {
     "compression": "^1.7.2",
