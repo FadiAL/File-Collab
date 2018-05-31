@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node server.js",
     "build": "webpack",
-    "test": "mocha test/socket.test.js"
+    "test": "mocha test/index.js"
   },
   "dependencies": {
     "compression": "^1.7.2",
@@ -40,6 +40,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "webpack": "^3.10.0"
