@@ -1,5 +1,6 @@
 const io = require('socket.io-client');
 const assert = require('chai').assert;
+const killable = require('killable');
 
 var socket, server;
 const fileName = 'r12312', url='http://localhost:8080';
@@ -13,9 +14,10 @@ process.env.NODE_ENV = "test";
 describe('Socket', function() {
   before(function() {
     server = require('../server.js');
+    killable(server);
   });
   after(function() {
-    server.close();
+    server.kill(function() {});
   });
   describe('#connect', function() {
     it('should return a non-null object', function() {
