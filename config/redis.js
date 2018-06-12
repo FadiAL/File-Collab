@@ -3,6 +3,7 @@ module.exports = function(client) {
     console.log(err);
   });
   client.on('connect', function() {
-    console.log("Redis connected to server");
+    if(process.env.NODE_ENV == "development")
+      console.log("Redis connected to server");
   });
 }

@@ -20,7 +20,8 @@
   "homepage": "https://github.com/FadiAL/File-Collab#readme",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "mocha test/index.js"
   },
   "dependencies": {
     "compression": "^1.7.2",
@@ -39,9 +40,10 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "browser-sync": "^2.23.6",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "killable": "^1.0.0",
+    "mocha": "^5.2.0",
     "webpack": "^3.10.0"
   }
 }
