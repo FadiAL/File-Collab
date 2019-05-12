@@ -1,4 +1,10 @@
 language: node_js
+services:
+  "redis-server"
 node_js:
   "iojs"
   "10"
+branches:
+  only:
+    "master"
+env: NODE_ENV=test
